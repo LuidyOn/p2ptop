@@ -20,6 +20,8 @@ public class p2p {
         int portaOutro = scanner.nextInt();
         scanner.nextLine();
 
+        scanner.close();
+
         new Thread(() -> iniciarServidor(minhaPorta, apelido)).start();
 
         if (!ip.isEmpty() && portaOutro > 0) {
@@ -75,7 +77,6 @@ private static void iniciarServidor(int porta, String apelido) {
             }
 
             socket.close();
-            scanner.close();
             System.out.println("Conexão encerrada.");
         } catch (IOException e) {
             e.printStackTrace();
