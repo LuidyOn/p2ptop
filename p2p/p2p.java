@@ -39,6 +39,17 @@ private static void iniciarServidor(int porta, String apelido) {
         }
     }
 
+    private static void conectarCliente(String ip, int porta, String apelido) {
+        try {
+            Socket socket = new Socket(ip, porta);
+            System.out.println("Conectado ao cliente!");
+
+            iniciarChat(socket, apelido);
+        } catch (IOException e) {
+            System.out.println("Falha ao conectar: " + e.getMessage());
+        }
+    }
+
 
     private static void iniciarChat(Socket socket, String apelido) {
         try {
@@ -62,4 +73,6 @@ private static void iniciarServidor(int porta, String apelido) {
             while (!(msg = scanner.nextLine()).equalsIgnoreCase("sair")) {
                 output.println(apelido + "--> " + msg);
             }
+
+            
   
