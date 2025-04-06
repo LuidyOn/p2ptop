@@ -15,7 +15,22 @@ public class p2p {
         System.out.print("Qual é a porta do outro cliente? ");
         int portaOutro = scanner.nextInt();
         scanner.nextLine();
-    
+        
     } 
 }
+
+
+
+
+private static void iniciarServidor(int porta, String apelido) {
+        try (ServerSocket serverSocket = new ServerSocket(porta)) {
+            System.out.println("Aguardando conexões na porta " + porta + "...");
+            Socket socket = serverSocket.accept();
+            System.out.println("Cliente conectado!");
+
+            iniciarChat(socket, apelido);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
   
