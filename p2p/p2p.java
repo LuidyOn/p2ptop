@@ -1,3 +1,7 @@
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
 public class p2p {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -24,9 +28,6 @@ public class p2p {
     } 
 }
 
-
-
-
 private static void iniciarServidor(int porta, String apelido) {
         try (ServerSocket serverSocket = new ServerSocket(porta)) {
             System.out.println("Aguardando conexões na porta " + porta + "...");
@@ -49,7 +50,6 @@ private static void iniciarServidor(int porta, String apelido) {
             System.out.println("Falha ao conectar: " + e.getMessage());
         }
     }
-
 
     private static void iniciarChat(Socket socket, String apelido) {
         try {
@@ -74,5 +74,11 @@ private static void iniciarServidor(int porta, String apelido) {
                 output.println(apelido + "--> " + msg);
             }
 
-            
-  
+            socket.close();
+            scanner.close();
+            System.out.println("Conexão encerrada.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
