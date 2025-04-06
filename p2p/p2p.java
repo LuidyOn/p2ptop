@@ -33,4 +33,28 @@ private static void iniciarServidor(int porta, String apelido) {
             e.printStackTrace();
         }
     }
+
+
+    private static void iniciarChat(Socket socket, String apelido) {
+        try {
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+            Scanner scanner = new Scanner(System.in);
+
+            Thread receiverThread = new Thread(() -> {
+                try {
+                    String msg;
+                    while ((msg = input.readLine()) != null) {
+                        System.out.println("Cliente: " + msg);
+                    }
+                } catch (IOException e) {
+                    System.out.println("Conexão encerrada.");
+                }
+            });
+            receiverThread.start();
+
+            String msg;
+            while (!(msg = scanner.nextLine()).equalsIgnoreCase("sair")) {
+                output.println(apelido + "--> " + msg);
+            }
   
