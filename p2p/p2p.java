@@ -15,6 +15,11 @@ public class p2p {
         System.out.print("Qual é a porta do outro cliente? ");
         int portaOutro = scanner.nextInt();
         scanner.nextLine();
+
+        new Thread(() -> iniciarServidor(minhaPorta, apelido)).start();
+
+        if (!ip.isEmpty() && portaOutro > 0) {
+            conectarCliente(ip, portaOutro, apelido);
         
     } 
 }
